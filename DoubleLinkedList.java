@@ -83,3 +83,4 @@ public class DoubleLinkedList<T> {
             current = current.next;
     }
 }
+//list
