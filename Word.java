@@ -36,3 +36,4 @@ public class Word {
     }
 
 }
+//insert the id of document for the word that has appered in it
