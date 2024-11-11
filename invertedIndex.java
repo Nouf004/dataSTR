@@ -31,4 +31,8 @@ public class invertedIndex{
          return true;
       return false;
    }//end method
+   
+   //if we need method display
+   
 }
+//this class is for searching and adding the uniqe words in list
