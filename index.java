@@ -2,21 +2,35 @@ import java.util.*;
 
 public class index{
 
-   DoubleLinkedList<Document_ID> indexList=new  DoubleLinkedList<Document_ID>();
-int ID;
+   DoubleLinkedList<Document> indexList;
 
-   /*index(int id,Word text){
-   ID=id;
-   indexList=
-   }*/
+   index(){
+      indexList=new  DoubleLinkedList<Document>();
+   }
 
-void addDoc(Document text){
-//if(indexList.empty()
-indexList.insert(text);
-}//end method addDoc
+   void addDoc(Document text){
+      indexList.insert(text);
+   }
 
-void displayDoc(){
-System.out.println(indexList.retrieve());
-}//end method displa
+   void displayDoc(){
+      if (indexList==null){
+         System.out.println(indexList.retrieve());
+         return;
+      }
+      else if(indexList.empty()){
+         System.out.println("empty");
+         return;
+      }
+      indexList.FindFirst();
+      while (!indexList.last()) {
+         Document doc= indexList.retrieve();
+         System.out.println("\n--------------------------------");
+         System.out.println("ID:"+doc.ID);
+         indexList.FindNext();
+      }//end while
+      Document doc= indexList.retrieve();
+      System.out.println("\n--------------------------------");
+      System.out.println("ID:"+doc.ID);
+   }//end method displa
 
 }//end of class
