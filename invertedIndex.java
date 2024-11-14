@@ -32,7 +32,14 @@ public class invertedIndex{
       return false;
    }//end method
    
-   //if we need method display
+void display() {
+inverList.FindFirst();
+while(!inverList.last()){
+System.out.println(inverList.current.retrieve());
+inverList.FindNext();
+}
+System.out.println(inverList.current.retrieve());
+
    
 }
 //this class is for searching and adding the uniqe words in list
