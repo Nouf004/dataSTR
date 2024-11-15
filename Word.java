@@ -3,11 +3,11 @@ import java.io.*;
 
 public class Word {
 
-    DoubleLinkedList<Integer> document_IDs;
+    LinkedList<Integer> document_IDs;
     String text;
 
     Word(String Text) {
-        document_IDs = new DoubleLinkedList<Integer>();
+        document_IDs = new LinkedList<Integer>();
         text = Text;
 
     }
