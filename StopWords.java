@@ -5,10 +5,10 @@ class StopWords{
    index index1;
    invertedIndex invers;
    InvertedIndexBST invertedBST;
-   DoubleLinkedList<String> stop;
+   LinkedList<String> stop;
 
    StopWords(){
-      stop=new DoubleLinkedList<String>();
+      stop=new LinkedList<String>();
       index1=new index();
       invers=new invertedIndex();
        invertedBST = new InvertedIndexBST();
@@ -50,10 +50,10 @@ System.out.println("Empty line, skipping=" + line);
 break; //to skip that line
 }
 
-String x = line.substring(0, line.indexOf(',');
+String x = line.substring(0, line.indexOf(','));
 int id = Integer.parseInt(x.trim());
 String content = line.substring(line.indexOf(',')+1).trim();
-DoubleLinkedList<String>wordsInDoc = make_words_inverted(content,id);
+LinkedList<String>wordsInDoc = make_words_inverted(content,id);
 index1.add_document(new Document(id, addWord));
    
 }
@@ -64,14 +64,14 @@ System.out.println("end of file");
 }
 }
 
-DoubleLinkedList<String> make_words_inverted (String content, int id){
+LinkedList<String> make_words_inverted (String content, int id){
 
-DoubleLinkedList<String> words = new DoubleLinkedList<String>();
+LinkedList<String> words = new LinkedList<String>();
 createIndex_InvertedIndex(content,words,id);
 return words;
 }
 
-void createIndex_InvertedIndex(String content, DoubleLinkedList<String> , int id){
+void createIndex_InvertedIndex(String content, LinkedList<String> , int id){
 
 content = content.toLowerCase().replaceAll("[^a-zA-Z0-9]" , "");
 String[] tokens = content.split("\\s+");
