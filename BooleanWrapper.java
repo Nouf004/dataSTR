@@ -1,3 +1,4 @@
+
 public class BooleanWrapper {
     private boolean value;
 

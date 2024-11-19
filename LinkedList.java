@@ -2,85 +2,77 @@
 import java.util.*;
 import java.io.*;
 
-public class DoubleLinkedList<T> {
+public class LinkedList<T> {
 
-    Node<T> head;
-    Node<T> current;
+   Node<T> head;
+   Node<T> current;
 
-    DoubleLinkedList() {
-        head = current = null;
+   LinkedList() {
+      head = current = null;
 
-    }
+   }
 
-    public boolean empty() {
-        return head == null;
-    }
+   public boolean empty() {
+      return head == null;
+   }
 
-    public boolean full() {
+   public boolean full() {
 
-        return false;
-    }
+      return false;
+   }
 
-    public void FindFirst() {
-        current = head;
-    }
+   public void FindFirst() {
+      current = head;
+   }
 
-    public void FindNext() {
-        current = current.next;
-    }
+   public void FindNext() {
+      current = current.next;
+   }
 
-    public void FindPrevious() {
-        current = current.previous;
-    }
+   public T retrieve() {
 
-    public T retrieve() {
+      return current.data;
+   }
 
-        return current.data;
-    }
+   public void update(T val) {
+      current.data = val;
+   }
 
-    public void update(T val) {
-        current.data = val;
-    }
+   public boolean last() {
+      return current.next == null;
+   }
 
-    public boolean last() {
-        return current.next == null;
-    }
+   public void insert(T val) {
+      Node<T> tmp;
 
-    public void insert(T val) {
-        Node<T> tmp = new Node<T>(val);
+      if (empty()) {
+         current = head = new Node<T>(val);
+      } else {
+         tmp = current.next;
+         current.next = new Node<T>(val);
+         current = current.next;
+         current.next = tmp;
+      }
+   }
 
-        if (empty()) {
-            current = head = tmp;
-        } else {
-            tmp.next = current.next;
-            tmp.previous = current;
+   public void remove() {
 
-            if (current.next != null)
-                current.next.previous = tmp;
+      if (current == head) {
+         head = head.next;
+      } else {
+         Node<T> tmp = head;
 
-            current.next = tmp;
-            current = tmp;
-        }
-    }
+         while (tmp.next != current)
+            tmp = tmp.next;
+         tmp.next = current.next;
+      }
+      if (current.next == null)
+         current = head;
+      else
+         current = current.next;
+   }
 
-    public void remove() {
-
-        if (current == head) {
-            head = head.next;
-
-            if (head != null)
-                head.previous = null;
-        } else {
-            current.previous.next = current.next;
-
-            if (current.next != null)
-                current.next.previous = current.previous;
-        }
-        if (current.next == null)
-            current = head;
-
-        else
-            current = current.next;
-    }
+   public void display() { // complete it
+   }
 }
-//list
+// list

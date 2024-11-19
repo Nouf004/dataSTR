@@ -1,129 +1,128 @@
-public class QAndOr{
+public class QAndOr {
 
-    static invertedIndex invert ;
+    static invertedIndex invert;
 
-    public QAndOr(invertedIndex inver ){
+    public QAndOr(invertedIndex inver) {
         invert = inver;
 
     }
 
-    public static LinkedList<Integer> AndQ(String Q){
+    public static LinkedList<Integer> AndQ(String Q) {
 
         LinkedList<Integer> X = new LinkedList<Integer>();
         LinkedList<Integer> Y = new LinkedList<Integer>();
-        String LAnd [] = Q.split("AND");
+        String LAnd[] = Q.split("AND");
 
-         if(LAnd.length ==0 )
-         return X;
-         boolean find = invert.search(LAnd[0].trim().toLowerCase());
-         if(find){
-            X = invert.inverted_index.retrieve().document_IDs;
-         }
-         for(int i=1 ; i<LAnd.length ; i++){
+        if (LAnd.length == 0)
+            return X;
+        boolean find = invert.search(LAnd[0].trim().toLowerCase());
+        if (find) {
+            X = invert.inverList.retrieve().document_IDs;
+        }
+        for (int i = 1; i < LAnd.length; i++) {
             find = invert.search(LAnd[i].trim().toLowerCase());
-            if(find )
-            Y = invert.inverted_index.retrieve().document_IDs;
-            X = AndQ(X,Y);
-         }
-         return X;
+            if (find)
+                Y = invert.inverList.retrieve().document_IDs;
+            X = AndQ(X, Y);
+        }
+        return X;
 
     }
 
-    public static LinkedList<Integer> AndQ(LinkedList<Integer> A ,LinkedList<Integer> B ){
+    public static LinkedList<Integer> AndQ(LinkedList<Integer> A, LinkedList<Integer> B) {
 
         LinkedList<Integer> X = new LinkedList<Integer>();
-        if(A.empty() || B.empty())
-        return X;
+        if (A.empty() || B.empty())
+            return X;
         A.FindFirst();
-        while(true){
-            boolean find = existent_results(X,A.retrieve());
-            if(!find){
+        while (true) {
+            boolean find = existent_results(X, A.retrieve());
+            if (!find) {
                 B.FindFirst();
-                while(true){
-                    if(B.retrieve().equals(A.retrieve())){
+                while (true) {
+                    if (B.retrieve().equals(A.retrieve())) {
                         X.insert(A.retrieve());
                         break;
-                    }//end inner if
-                if(!B.last())
-                  B.FindNext();
-                else
-                  break;
-                }//end inner while
+                    } // end inner if
+                    if (!B.last())
+                        B.FindNext();
+                    else
+                        break;
+                } // end inner while
 
-            }//end if 
-            if(!A.last())
-              A.FindNext();
+            } // end if
+            if (!A.last())
+                A.FindNext();
             else
-            break;
+                break;
 
-
-        }//end while
-       return X;
+        } // end while
+        return X;
     }
 
-    public static LinkedList<Integer> OrQ(String Q){
+    public static LinkedList<Integer> OrQ(String Q) {
         LinkedList<Integer> X = new LinkedList<Integer>();
         LinkedList<Integer> Y = new LinkedList<Integer>();
-        String LOr [] = Q.split("OR");
+        String LOr[] = Q.split("OR");
 
-        if(LOr.length ==0 )
-        return X;
+        if (LOr.length == 0)
+            return X;
         boolean find = invert.search(LOr[0].trim().toLowerCase());
-        if(find){
-           X = invert.inverted_index.retrieve().document_IDs;
+        if (find) {
+            X = invert.inverList.retrieve().document_IDs;
         }
-        for(int i=1 ; i<LOr.length ; i++){
-           find = invert.search(LOr[i].trim().toLowerCase());
-           if(find )
-           Y = invert.inverted_index.retrieve().document_IDs;
-           X = OrQ(X,Y);
+        for (int i = 1; i < LOr.length; i++) {
+            find = invert.search(LOr[i].trim().toLowerCase());
+            if (find)
+                Y = invert.inverList.retrieve().document_IDs;
+            X = OrQ(X, Y);
         }
         return X;
 
     }
-    
-    public static LinkedList<Integer> OrQ(LinkedList<Integer> A ,LinkedList<Integer> B ){
+
+    public static LinkedList<Integer> OrQ(LinkedList<Integer> A, LinkedList<Integer> B) {
 
         LinkedList<Integer> X = new LinkedList<Integer>();
-        if(A.empty() && B.empty())
-        return X;
+        if (A.empty() && B.empty())
+            return X;
         A.FindFirst();
-        while(!A.empty()){
-            boolean find = existent_results(X,A.retrieve());
-            if(!find){
+        while (!A.empty()) {
+            boolean find = existent_results(X, A.retrieve());
+            if (!find) {
                 X.insert(A.retrieve());
-            }//end if 
-            if(!A.last())
-              A.FindNext();
+            } // end if
+            if (!A.last())
+                A.FindNext();
             else
-            break;
-        }//end while
+                break;
+        } // end while
         B.FindFirst();
-        while(!B.empty()){
-            boolean find = existent_results(X,B.retrieve());
-            if(!find){
+        while (!B.empty()) {
+            boolean find = existent_results(X, B.retrieve());
+            if (!find) {
                 X.insert(B.retrieve());
-            }//end if 
-            if(!B.last())
-              B.FindNext();
+            } // end if
+            if (!B.last())
+                B.FindNext();
             else
-            break;
+                break;
 
         }
         return X;
     }
 
-    public static boolean existent_results(LinkedList<Integer> result , Integer ID){
-        if(result.empty())
-        return false;
+    public static boolean existent_results(LinkedList<Integer> result, Integer ID) {
+        if (result.empty())
+            return false;
         result.FindFirst();
-        while(!result.last()){
-            if(result.retrieve().equals(ID)){
+        while (!result.last()) {
+            if (result.retrieve().equals(ID)) {
                 return true;
             }
             result.FindNext();
-    }
-        if(result.retrieve().equals(ID)){
+        }
+        if (result.retrieve().equals(ID)) {
             return true;
         }
         return false;

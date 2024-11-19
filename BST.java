@@ -1,191 +1,178 @@
 public class BST<T> {
 
-BSTNode<T> root, current;
+    BSTNode<T> root, current;
 
-BST() {
+    BST() {
 
-root = cuurent = null;
+        root = current = null;
 
-}
+    }
 
-boolean empty() {
+    boolean empty() {
 
-return root ==null;
-}
+        return root == null;
+    }
 
+    boolean full() {
+        return false;
+    }
 
+    T retrieve() {
 
-boolean full() {
-return false;
-}
+        return current.data;
+    }
 
-T retrieve() {
+    boolean findkey(int tkey) {
+        BSTNode<T> p = root, q = root;
 
-return current.data;
-}
+        if (empty())
+            return false;
 
-boolean findkey (int tkey) {
-BSTNode<T> p = root , q= root;
+        while (p != null) {
 
-if (empty())
-return false;
+            q = p;
+            if (p.key == tkey) {
+                current = p;
+                return true;
+            }
 
-while(p != null) {
+            else if (tkey < p.key)
+                p = p.left;
 
-q =p;
-if (p.key ==tkey) {
-current = p;
-return true;
-}
+            else
+                p = p.right;
+        }
 
-else if(tkey <p.key)
-p = p.left;
+        current = q;
+        return false;
+    }
 
-else 
-p = p.right;
-}
+    boolean insert(int k, T val) {
+        BSTNode<T> p, q = current;
 
-current =q;
-return false;
-}
+        if (findkey(k)) {
 
-boolean insert(int k, T val) {
-BSTNode<T> p, q = current;
+            current = q;
+            return false;
+        }
 
-if (findkey(k)) {
+        p = new BSTNode<T>(k, val);
 
-current = q;
-return false;
-}
+        if (empty()) {
 
-p = new BSTNode<T> (k, val);
+            root = current = p;
+            return true;
+        } else {
+            if (k < current.key)
+                current.left = p;
+            else
+                current.right = p;
 
-if(empty()) {
+            current = p;
+            return true;
+        }
 
-root= current = p;
-return true;
-}
-else {
-if (k < current.key) 
-current.left =p;
-else 
-current.right = p;
+    } // end insert
 
-current = p;
-return true;
-}
+    boolean remove_key(int tkey) {
 
-} //end insert
+        BooleanWrapper removed = new BooleanWrapper(false);
 
-boolean remove_key (int tkey) {
+        BSTNode<T> p;
+        p = remove_aux(tkey, root, removed);
+        current = root = p;
+        return removed.get();
 
-BooleanWrapper removed = new Boolean (false);
+    }// end remove key
 
-BSTNode<T> p;
-p = remove_aux(tkey , root, removed);
-current = root = p;
-return removed;
+    private BSTNode<T> remove_aux(int key, BSTNode<T> p, BooleanWrapper flag) {
 
-}//end remove key
+        BSTNode<T> q, child = null;
 
-private BSTNode<T> remove_aux(int key, BSTNode<T> p , BooleanWrapper flag){
+        if (p == null)
+            return null;
 
-BSTNode<T> q, child = null;
+        if (key < p.key)
+            p.left = remove_aux(key, p.left, flag);
+        else if (key > p.key)
+            p.right = remove_aux(key, p.right, flag);
 
-if(p==null) 
-return null;
+        else {
+            flag.set(true);
+            if (p.left != null && p.right != null) {
+                q = find_min(p.right);
+                p.key = q.key;
+                p.data = q.data;
+                p.right = remove_aux(q.key, p.right, flag);
+            }
 
-if(key<p.key) 
-p.left = remove_aux(key, p.left , flag);
-else if(key>p.key)
-p.right = remove_aux(key, p.right , flag);
+            else {
+                if (p.right == null)
+                    child = p.left;
+                else if (p.left == null)
+                    child = p.right;
+                return child;
+            }
+        }
+        return p;
 
-else {
-flag.set(true);
-if(p.left!= null && p.right !=null) {
-q = find_min(p.right);
-p.key = q.key;
-p.data = q.data;
-p.right = remove_aux(q.key, p.right, flag);
-}
+    } // remove aux
 
-else {
-if (p.right ==null) 
-child = p.left;
-else 
-if(p.left == null) 
-child = p.right;
-return child; 
-}
-}
-return p ;
+    private BSTNode<T> find_min(BSTNode<T> p) {
 
-} //remove aux
+        if (p == null)
+            return null;
 
-private BSTNode<T> find_min(BSTNode<T> p) {
+        while (p.left != null) {
+            p = p.left;
+        }
 
-if (p==null) 
-return null;
+        return p;
+    } // end find min
 
-while(p.left !==null) {
-p=p.left;
-}
+    boolean update(int key, T data) {
 
-return p;
-} //end find min
+        remove_key(current.key);
 
-boolean update( int key, T data) {
- 
-remove_key(current.key);
+        return insert(key, data);
+    }// end update
 
-return insert(key,data);
-}//end update
+    void inOrder() {
 
+        if (root == null)
+            System.out.println("the tree is empty");
 
-void inOrder() {
+        inOrder(root);
 
-if (root==null)
-System.out.println("the tree is empty");
+    }// end inorder
 
-inOrder(root);
+    private void inOrder(BSTNode p) {
 
-}//end inorder
+        if (p == null)
+            return;
+        inOrder(p.left);
+        System.out.println("key=" + p.key);
+        System.out.println(p.data);
+        inOrder(p.right);
+    }
 
+    void preOrder() {
 
-private void inOrder(BSTNode p) {
+        if (root == null)
+            System.out.println("the tree is empty");
+        else
+            preOrder(root);
+    }
 
+    private void preOrder(BSTNode p) {
 
-if(p ==null)
-return;
-inOrder(p.left);
-System.out.println("key=" + p.key);
-System.out.println(p.data);
-inOrder(p.right);
-}
+        if (p == null)
+            return;
+        System.out.println("key=" + p.key);
+        System.out.println(p.data.toString());
+        preOrder(p.left);
+        preOrder(p.right);
 
+    }
 
-void preOrder() {
-
-if(root==null) 
-System.out.println("the tree is empty");
-else
-preOrder(root);
-}
-
-private void preOrder(BSTNode p) {
-
-
-if(p ==null)
-return;
-System.out.println("key=" + p.key);
-System.out.println(p.data.toString());
-preOrder(p.left);
-preOrder(p.right);
-
-}
-
-
-
-
-
-} //end class
+} // end class

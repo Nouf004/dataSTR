@@ -1,37 +1,38 @@
 import java.util.*;
 
-public class index{
+public class index {
 
-   DoubleLinkedList<Document> indexList;
+   LinkedList<Document> indexList;
 
-   index(){
-      indexList=new  DoubleLinkedList<Document>();
+   index() {
+      indexList = new LinkedList<Document>();
    }
 
-   void addDoc(Document text){
+   void addDoc(Document text) {
       indexList.insert(text);
    }
 
-   void displayDoc(){
-      if (indexList==null){
+   void displayDoc() {
+      if (indexList == null) {
          System.out.println(indexList.retrieve());
          return;
-      }
-      else if(indexList.empty()){
+      } else if (indexList.empty()) {
          System.out.println("empty");
          return;
       }
       indexList.FindFirst();
       while (!indexList.last()) {
-         Document doc= indexList.retrieve();
+         Document doc = indexList.retrieve();
          System.out.println("\n--------------------------------");
-         System.out.println("ID:"+doc.ID);
+         System.out.println("ID:" + doc.ID);
          indexList.FindNext();
-      }//end while
-      Document doc= indexList.retrieve();
+      } // end while
+      Document doc = indexList.retrieve();
       System.out.println("\n--------------------------------");
-      System.out.println("ID:"+doc.ID);
-   }//end method displa
+      System.out.println("ID:" + doc.ID);
+   }// end method displa
 
-}//end of class
-//this class for id and doc
+   // display
+
+}// end of class
+ // this class for id and doc

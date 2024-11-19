@@ -1,66 +1,64 @@
 public class InvertedIndexBST {
 
-BST<Word> inverted_index;
+   BST<Word> inverted_index;
 
-public InvertedIndexBST() {
-inverted_index = new BST<Word>();
+   public InvertedIndexBST() {
+      inverted_index = new BST<Word>();
 
-}
+   }
 
-void addFromList(InvertedIndex inverted) { //adding from inverted list
+   void addFromList(invertedIndex inverted) { // adding from inverted list
 
-if (inverted.inverted_index.empty() )
-return;
-inverted.inverted_index.FindFirst();
-while(!inverted.inverted_index.last() ) {
+      if (inverted.inverList.empty())
+         return;
+      inverted.inverList.FindFirst();
+      while (!inverted.inverList.last()) {
 
-inverted.inverted_index.insert(inverted.inverted_index.retrieve().text , inverted.inverted_index.retrieve() );
+         inverted.inverList.insert(inverted.inverList.retrieve().text, inverted.inverList.retrieve());
 
-inverted.inverted_index.FindNext();
+         inverted.inverList.FindNext();
 
-} //while
+      } // while
 
-inverted.inverted_index.insert(inverted.inverted_index.retrieve().text , inverted.inverted_index.retrieve() );
+      inverted.inverList.insert(inverted.inverList.retrieve().text, inverted.inverList.retrieve());
 
+   }// end add from list
 
-}//end add from list
-
-
- void add(String str, int ID){
-      if(!search(str)){
-         Word w= new Word(str);
+   void add(String str, int ID) {
+      if (!search(str)) {
+         Word w = new Word(str);
          w.document_IDs.insert(ID);
          inverted_index.insert(w);
-      }//end if
-      else{
-         Word existWord=inverted_index.retrieve();
+      } // end if
+      else {
+         Word existWord = inverted_index.retrieve();
          existWord.addID(ID);
       }
-   }//end method
- boolean search(String word){
-      if(inverted_index==null||inverted_index.empty())
+   }// end method
+
+   boolean search(String word) {
+      if (inverted_index == null || inverted_index.empty())
          return false;
       inverted_index.FindFirst();
-      while(!inverted_index.last()){
-         if(inverted_index.retrieve().text.equals(word))
+      while (!inverted_index.last()) {
+         if (inverted_index.retrieve().text.equals(word))
             return true;
          inverted_index.FindNext();
-      }//while
-      if(inverted_index.retrieve().text.equals(word))
+      } // while
+      if (inverted_index.retrieve().text.equals(word))
          return true;
       return false;
-   }//end method
+   }// end method
 
-void displayInvertedIndex() {
+   void displayInvertedIndex() {
 
-if(inverted_index ==null) {
-System.out.println("null");
-return;
-}
-else if (inverted_index.empty() ) {
-System.out.println("it is empty");
-return;
-}
-inverted_index.inOrder();
-}
-} //end class
+      if (inverted_index == null) {
+         System.out.println("null");
+         return;
+      } else if (inverted_index.empty()) {
+         System.out.println("it is empty");
+         return;
+      }
+      inverted_index.inOrder();
+   }
+} // end class
