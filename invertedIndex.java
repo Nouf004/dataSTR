@@ -1,9 +1,9 @@
 import java.util.*;
 public class invertedIndex{
-   DoubleLinkedList<Word> inverList;
+   LinkedList<Word> inverList;
 
    invertedIndex(){
-      inverList=new DoubleLinkedList<Word>();
+      inverList=new LinkedList<Word>();
    }//const
 
    void addWord(String str, int ID){
