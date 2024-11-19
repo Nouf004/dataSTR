@@ -103,10 +103,8 @@ void loadAllFiles (String Sfile , String docFiles) {
  Load_Stop(Sfile);
  loadAllDocs(docFiles);
  }
-void displayDocWithID(LinkedList<Integer>id) {
-   stop.display();
-}
-   
+
+
 }//end of class
 
 // main?
