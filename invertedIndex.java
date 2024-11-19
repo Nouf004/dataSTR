@@ -35,10 +35,10 @@ public class invertedIndex{
 void display() {
 inverList.FindFirst();
 while(!inverList.last()){
-System.out.println(inverList.current.retrieve());
+System.out.println(inverList.retrieve());
 inverList.FindNext();
 }
-System.out.println(inverList.current.retrieve());
+System.out.println(inverList.retrieve());
 
    
 }
