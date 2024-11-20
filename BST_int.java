@@ -1,21 +1,8 @@
-class BSTNode1<T> {
 
-public int key;
-public T data;
-public BSTNode1<T> left, right;
-
-public BSTNode1(int key, T data) {
-
-this.key = key;
-this.data = data;
-left = right= null;
-
-}
-}
 
 public class BST_int<T> {
 
-private BSTNode1<T> root, current;
+private BSTNode<T> root, current;
 
 public BST_int() {
 current = root = null;
@@ -36,7 +23,7 @@ return current.data;
 
 public boolean findKey(int k) {
 
-BSTNode1<T> p = root;
+BSTNode<T> p = root;
 while(p!=null) {
 current = p;
 
@@ -57,11 +44,11 @@ public boolean insert(int k , T val) {
 
 if(root==null) {
 
-current = root = new BSTNode1<T>(k,val);
+current = root = new BSTNode<T>(k,val);
 return true;
 }
 
-BSTNode1<T> p = root;
+BSTNode<T> p = root;
 while(p != null) {
 current = p;
 if(k< p.key){
@@ -72,7 +59,7 @@ p = p.right;
 }
 }
 
-BSTNode1<T> tmp = new BSTNode1<T> (k,val);
+BSTNode<T> tmp = new BSTNode<T> (k,val);
 
 if(k<current.key) {
 current.left=tmp;
@@ -86,20 +73,29 @@ current = tmp;
 return true;
 }
 
-public void display_decreasing() {
+public void decreasing(BSTNode p) {
 
 if(root ==null)
 return ;
 
 decreasing(p.right);
 System.out.println(p.data);
-System.out.println)"    " +p.key);
+System.out.println("    " +p.key);
 decreasing(p.left);
 
 }
 
 
 
+public void display_decreasing() {
 
+if(root ==null)
+System.out.println("empty tree");
+
+else
+System.out.println("DocID     Score");
+decreasing(root);
+
+}
 
 } //end class
