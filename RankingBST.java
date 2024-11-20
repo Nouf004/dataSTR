@@ -1,12 +1,14 @@
+import java.util.*;
+
 public class RankingBST {
 
     static String query;
     static InvertedIndexBST invert;
     static index ind;
     static LinkedList<Integer> allDocuments;
-    static BSTInt<Integer> IDsRanked;
+    static BST_int<Integer> IDsRanked;
 
-    public RankingBST(String str, InvertedIndexBST inv, index in, LinkedList<Integer> docs, BSTInt<Integer> IDs) {
+    public RankingBST(String str, InvertedIndexBST inv, index in, LinkedList<Integer> docs, BST_int<Integer> IDs) {
         query = str;
         invert = inv;
         ind = in;
@@ -20,14 +22,16 @@ public class RankingBST {
             return;
         x.FindFirst();
         while (!x.empty()) {
-            boolean find = existsInResult(allDocuments, x.retrieve());
-            if (!find)
+            boolean found = existsInResult(allDocuments, x.retrieve());
+            if (!found) {// when it is not found in result
                 allDocuments.insert(x.retrieve());
-        }
-        if (!x.last())
-            x.FindNext();
-        else
-            break;
+
+            } // end if
+            if (!x.last())
+                x.FindNext();
+            else
+                break;
+        } // end while loop
     }
 
     public static void AddInlistSorted(LinkedList<Integer> x) {
@@ -35,14 +39,16 @@ public class RankingBST {
             return;
         x.FindFirst();
         while (!x.empty()) {
-            boolean find = existsInResult(allDocuments, x.retrieve());
-            if (!find)
+            boolean found = existsInResult(allDocuments, x.retrieve());
+            if (!found) {// when it is not found in result
                 insertSortedList(x.retrieve());
+
+            } // end if
+            if (!x.last())
+                x.FindNext();
+            else
+                break;
         }
-        if (!x.last())
-            x.FindNext();
-        else
-            break;
 
     }
 
@@ -106,16 +112,16 @@ public class RankingBST {
     }
 
     public static void displayAllDoc() {
-        IDsRanked.displayDecreasing();
+        IDsRanked.display_decreasing();
     }
 
-    public static int getDocID(int id) {
+    public static Document getDocID(int id) {
         return ind.getID(id);
     }
 
     public static int frequencyInDoc(Document doc, String term) {
         int f = 0;
-        LinkedList<Integer> words = doc.words;
+        LinkedList<String> words = doc.List_ID;
         if (words.empty())
             return 0;
         words.FindFirst();

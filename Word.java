@@ -17,16 +17,16 @@ public class Word {
             document_IDs.insert(ID);
 
     }
-    
-void display() {
 
-System.out.println("\n-----------------------------");
-System.out.println("word:" + text);
-System.out.println("[");
-document_IDs.display();
-System.out.println("]");
+    void display() {
 
-}
+        System.out.println("\n-----------------------------");
+        System.out.println("word:" + text);
+        System.out.println("[");
+        document_IDs.display();
+        System.out.println("]");
+
+    }
 
     boolean exists(int id) {
 

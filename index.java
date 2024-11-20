@@ -12,6 +12,23 @@ public class index {
       indexList.insert(text);
    }
 
+   Document getID(int id) {
+      if (indexList.empty()) {
+         System.out.println("the document does not exists");
+         return null;
+      }
+      indexList.FindFirst();
+      while (!indexList.last()) {
+         if (indexList.retrieve().ID == id)
+            return indexList.retrieve();
+         indexList.FindNext();
+      }
+      if (indexList.retrieve().ID == id)
+         return indexList.retrieve();
+      return null;
+
+   }
+
    void displayDoc() {
       if (indexList == null) {
          System.out.println(indexList.retrieve());

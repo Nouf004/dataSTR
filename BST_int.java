@@ -1,101 +1,112 @@
 
+public class BSTNode<T> {
+
+    public int key;
+    public T data;
+    public BSTNode<T> left, right;
+
+    public BSTNode(int k, T val) {
+
+        key = k;
+        data = val;
+        left = right = null;
+
+    }
+
+}
 
 public class BST_int<T> {
 
-private BSTNode<T> root, current;
+    private BSTNode<T> root, current;
 
-public BST_int() {
-current = root = null;
-}
+    public BST_int() {
+        current = root = null;
+    }
 
-public boolean empty() {
-return root == null;
-}
+    public boolean empty() {
+        return root == null;
+    }
 
-public boolean full() {
-return false;
-}
+    public boolean full() {
+        return false;
+    }
 
-public T retrieve() {
+    public T retrieve() {
 
-return current.data;
-}
+        return current.data;
+    }
 
-public boolean findKey(int k) {
+    public boolean findKey(int k) {
 
-BSTNode<T> p = root;
-while(p!=null) {
-current = p;
+        BSTNode<T> p = root;
+        while (p != null) {
+            current = p;
 
-if(k ==(p.key)) {
-return true;
-}
-else if(k> p.key) {
-p =p.right;
-}
+            if (k == (p.key)) {
+                return true;
+            } else if (k > p.key) {
+                p = p.right;
+            }
 
-else {
-p= p.left;
-}
-}
-return false;
-}
-public boolean insert(int k , T val) {
+            else {
+                p = p.left;
+            }
+        }
+        return false;
+    }
 
-if(root==null) {
+    public boolean insert(int k, T val) {
 
-current = root = new BSTNode<T>(k,val);
-return true;
-}
+        if (root == null) {
 
-BSTNode<T> p = root;
-while(p != null) {
-current = p;
-if(k< p.key){
-p=p.left;
-}
-else {
-p = p.right;
-}
-}
+            current = root = new BSTNode<T>(k, val);
+            return true;
+        }
 
-BSTNode<T> tmp = new BSTNode<T> (k,val);
+        BSTNode<T> p = root;
+        while (p != null) {
+            current = p;
+            if (k < p.key) {
+                p = p.left;
+            } else {
+                p = p.right;
+            }
+        }
 
-if(k<current.key) {
-current.left=tmp;
-}
+        BSTNode<T> tmp = new BSTNode<T>(k, val);
 
-else {
-current.right = tmp;
-}
+        if (k < current.key) {
+            current.left = tmp;
+        }
 
-current = tmp; 
-return true;
-}
+        else {
+            current.right = tmp;
+        }
 
-public void decreasing(BSTNode p) {
+        current = tmp;
+        return true;
+    }
 
-if(root ==null)
-return ;
+    public void decreasing(BSTNode p) {
 
-decreasing(p.right);
-System.out.println(p.data);
-System.out.println("    " +p.key);
-decreasing(p.left);
+        if (root == null)
+            return;
 
-}
+        decreasing(p.right);
+        System.out.println(p.data);
+        System.out.println("    " + p.key);
+        decreasing(p.left);
 
+    }
 
+    public void display_decreasing() {
+        if (root == null)
+            System.out.println("empty tree");
 
-public void display_decreasing() {
-
-if(root ==null)
-System.out.println("empty tree");
-
-else
-System.out.println("DocID     Score");
-decreasing(root);
+        else
+            System.out.println("DocID     Score");
+        decreasing(root);
+    }
 
 }
-
-} //end class
+// end class

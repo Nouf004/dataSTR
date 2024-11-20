@@ -78,9 +78,9 @@ class StopWords {
       content = content.toLowerCase().replaceAll("[^a-zA-Z0-9]", "");
       String[] tokens = content.split("\\s+");
       for (int i = 0; i < tokens.length; i++) {
-         if (!existStopWords(List_ID)) {
-            wordsInDoc.insert(words);
-            invers.add(List_ID, id);
+         if (!existStopWords(content)) {
+            wordsInDoc.insert(content);
+            invers.addWord(content, id);
          }
       }
    }

@@ -30,7 +30,7 @@ public class Ranking {
     }// end method
 
     public static Document getDocGivenId(int id) {
-        return Index.getDocID(id);// ?
+        return Index.getID(id);// ?
     }
 
     // trem frequency in doc

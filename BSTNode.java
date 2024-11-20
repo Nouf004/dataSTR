@@ -12,12 +12,4 @@ public class BSTNode<T> {
 
     }
 
-    public BSTNode(int k, T val, BSTNode<T> l, BSTNode<T> r) {
-        key = k;
-        data = val;
-        left = l;
-        right = r;
-
-    }
-
 }

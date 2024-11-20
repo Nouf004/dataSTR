@@ -14,13 +14,13 @@ public class InvertedIndexBST {
       inverted.inverList.FindFirst();
       while (!inverted.inverList.last()) {
 
-         inverted.inverList.insert(inverted.inverList.retrieve().text, inverted.inverList.retrieve());
+         inverted_index.insert(inverted.inverList.retrieve().text, inverted.inverList.retrieve());
 
          inverted.inverList.FindNext();
 
       } // while
 
-      inverted.inverList.insert(inverted.inverList.retrieve().text, inverted.inverList.retrieve());
+      inverted_index.insert(inverted.inverList.retrieve().text, inverted.inverList.retrieve());
 
    }// end add from list
 
@@ -28,7 +28,7 @@ public class InvertedIndexBST {
       if (!search(str)) {
          Word w = new Word(str);
          w.document_IDs.insert(ID);
-         inverted_index.insert(w);
+         inverted_index.insert(str, w);
       } // end if
       else {
          Word existWord = inverted_index.retrieve();
@@ -37,17 +37,7 @@ public class InvertedIndexBST {
    }// end method
 
    boolean search(String word) {
-      if (inverted_index == null || inverted_index.empty())
-         return false;
-      inverted_index.FindFirst();
-      while (!inverted_index.last()) {
-         if (inverted_index.retrieve().text.equals(word))
-            return true;
-         inverted_index.FindNext();
-      } // while
-      if (inverted_index.retrieve().text.equals(word))
-         return true;
-      return false;
+      return inverted_index.findkey(word);
    }// end method
 
    void displayInvertedIndex() {

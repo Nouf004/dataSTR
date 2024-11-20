@@ -1,6 +1,22 @@
+public class BSTNode<T> {
+
+    public String key;
+    public T data;
+    public BSTNode<T> left, right;
+
+    public BSTNode(String k, T val) {
+
+        key = k;
+        data = val;
+        left = right = null;
+
+    }
+
+}
+
 public class BST<T> {
 
-    BSTNode<T> root, current;
+    private BSTNode<T> root, current;
 
     BST() {
 
@@ -22,120 +38,115 @@ public class BST<T> {
         return current.data;
     }
 
-    boolean findkey(int tkey) {
-        BSTNode<T> p = root, q = root;
-
-        if (empty())
-            return false;
+    boolean findkey(String tkey) {
+        BSTNode<T> p = root;
 
         while (p != null) {
 
-            q = p;
-            if (p.key == tkey) {
-                current = p;
+            current = p;
+            if (tkey.compareToIgnoreCase(p.key) == 0) {
                 return true;
             }
 
-            else if (tkey < p.key)
+            else if (tkey.compareToIgnoreCase(p.key) < 0)
                 p = p.left;
-
             else
                 p = p.right;
         }
-
-        current = q;
         return false;
     }
 
-    boolean insert(int k, T val) {
-        BSTNode<T> p, q = current;
+    boolean insert(String k, T val) {
+        if (root == null) {
+            current = root = new BSTNode<T>(k, val);
+            return true;
+        }
+
+        BSTNode<T> p = current;
 
         if (findkey(k)) {
 
-            current = q;
+            current = p;
             return false;
         }
+        BSTNode<T> tmp = new BSTNode<T>(k, val);
 
-        p = new BSTNode<T>(k, val);
+        if (k.compareToIgnoreCase(current.key) < 0)
+            current.left = tmp;
+        else
+            current.right = tmp;
 
-        if (empty()) {
-
-            root = current = p;
-            return true;
-        } else {
-            if (k < current.key)
-                current.left = p;
-            else
-                current.right = p;
-
-            current = p;
-            return true;
-        }
+        current = tmp;
+        return true;
 
     } // end insert
 
-    boolean remove_key(int tkey) {
+    /*
+     * boolean remove_key(int tkey) {
+     * 
+     * BooleanWrapper removed = new BooleanWrapper(false);
+     * 
+     * BSTNode<T> p;
+     * p = remove_aux(tkey, root, removed);
+     * current = root = p;
+     * return removed.get();
+     * 
+     * }// end remove key
+     * 
+     * private BSTNode<T> remove_aux(int key, BSTNode<T> p, BooleanWrapper flag) {
+     * 
+     * BSTNode<T> q, child = null;
+     * 
+     * if (p == null)
+     * return null;
+     * 
+     * if (key < p.key)
+     * p.left = remove_aux(key, p.left, flag);
+     * else if (key > p.key)
+     * p.right = remove_aux(key, p.right, flag);
+     * 
+     * else {
+     * flag.set(true);
+     * if (p.left != null && p.right != null) {
+     * q = find_min(p.right);
+     * p.key = q.key;
+     * p.data = q.data;
+     * p.right = remove_aux(q.key, p.right, flag);
+     * }
+     * 
+     * else {
+     * if (p.right == null)
+     * child = p.left;
+     * else if (p.left == null)
+     * child = p.right;
+     * return child;
+     * }
+     * }
+     * return p;
+     * 
+     * } // remove aux
+     */
 
-        BooleanWrapper removed = new BooleanWrapper(false);
-
-        BSTNode<T> p;
-        p = remove_aux(tkey, root, removed);
-        current = root = p;
-        return removed.get();
-
-    }// end remove key
-
-    private BSTNode<T> remove_aux(int key, BSTNode<T> p, BooleanWrapper flag) {
-
-        BSTNode<T> q, child = null;
-
-        if (p == null)
-            return null;
-
-        if (key < p.key)
-            p.left = remove_aux(key, p.left, flag);
-        else if (key > p.key)
-            p.right = remove_aux(key, p.right, flag);
-
-        else {
-            flag.set(true);
-            if (p.left != null && p.right != null) {
-                q = find_min(p.right);
-                p.key = q.key;
-                p.data = q.data;
-                p.right = remove_aux(q.key, p.right, flag);
-            }
-
-            else {
-                if (p.right == null)
-                    child = p.left;
-                else if (p.left == null)
-                    child = p.right;
-                return child;
-            }
-        }
-        return p;
-
-    } // remove aux
-
-    private BSTNode<T> find_min(BSTNode<T> p) {
-
-        if (p == null)
-            return null;
-
-        while (p.left != null) {
-            p = p.left;
-        }
-
-        return p;
-    } // end find min
-
-    boolean update(int key, T data) {
-
-        remove_key(current.key);
-
-        return insert(key, data);
-    }// end update
+    /*
+     * private BSTNode<T> find_min(BSTNode<T> p) {
+     * 
+     * if (p == null)
+     * return null;
+     * 
+     * while (p.left != null) {
+     * p = p.left;
+     * }
+     * 
+     * return p;
+     * } // end find min
+     * 
+     * boolean update(int key, T data) {
+     * 
+     * remove_key(current.key);
+     * 
+     * return insert(key, data);
+     * }// end update
+     */
 
     void inOrder() {
 
@@ -151,8 +162,10 @@ public class BST<T> {
         if (p == null)
             return;
         inOrder(p.left);
-        System.out.println("key=" + p.key);
-        System.out.println(p.data);
+        // System.out.println("key=" + p.key);
+        // System.out.println(p.data);
+        ((Word) p.data).display();
+
         inOrder(p.right);
     }
 
