@@ -57,22 +57,75 @@ System.out.println("term not found in inverted list index list.");
 
 break; //end case1
 
+case 2:
+s.nextLine();
+System.out.println("enter a query to retrieve");
+String Q = s.nextLine();
+Q = Q.toLowerCase();
+Q=Q.replaceAll(" and " , " AND " );
+Q=Q.replaceAll(" or " , " OR ");
 
+System.out.println("which method would you want to make a query? 1-using index with lists. 2- inverted index with lists. 3- inverted index with BST.");
 
+int x = input.nextInt();
 
+if(x==1) {
 
-
-
+ 
 case 3:
 w.nextLine();
 System.out.println("Enter a query to rank it");
 String Q2 = w.nextLine();
 Q2 = Q2.toLowerCase();
 
-Ranking R5
+Ranking R5(s.invertedBST ,index1, Q2);
+R5.displayAllDoc();
+break;
+
+case 4:
+
+s.index1.displayDoc();
+System.out.println("===========================");
+break;
+
+case 5:
+
+System.out.println("num of documents=" + StopWords.index1.allDocuments.
+System.out.println("=================");
+
+break;
+
+case 6:
+
+System.out.println("num of documents=" + s.inverted.inverted_index.
+System.out.println("=================");
+
+break;
+
+case 7: s.inverted.display();
+break;
+
+case 8:
+s.invertedBST.display();
+break;
+
+case 9:
+
+System.out.println("num of tokens=" s.
+System.out.println("num of unique words invluding stop words=" s.
+
+break;
+
+case 10:
+
+System.out.println("Menu exited");
+
+default :
+System.out.println("Error!");
 
 
-} //switch
+
+} while (ch!10)  //switch
 
 
 
