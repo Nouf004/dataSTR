@@ -81,7 +81,7 @@ public class Ranking {
             return;
         x.FindFirst();
         while (!x.empty()) {
-            boolean found = existInResult(allDocInQ, x.retrieve());
+            boolean found = existsInResult(allDocInQ, x.retrieve());
             if (!found) {// when it is not found in result
                 allDocInQ.insert(x.retrieve());
 
@@ -93,7 +93,7 @@ public class Ranking {
         } // end while loop
     }// end method
 
-    public static boolean existInResult(LinkedList<Integer> result, Integer id) {
+    public static boolean existsInResult(LinkedList<Integer> result, Integer id) {
         if (result.empty())
             return false;
         result.FindFirst();

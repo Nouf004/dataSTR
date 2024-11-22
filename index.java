@@ -49,7 +49,25 @@ public class index {
       System.out.println("ID:" + doc.ID);
    }// end method displa
 
-   // display
+   LinkedList<Integer> getallDocumentInTerms(String term) {
+      LinkedList<Integer> list = new LinkedList<Integer>();
+      if (indexList.empty()) {
+         System.out.println("there is no document");
+         return list;
+      }
+      indexList.FindFirst();
+      while (!indexList.last()) {
+         if (indexList.retrieve().List_ID.equals(term.toLowerCase().trim()))
+            list.insert(indexList.retrieve().ID);
+         list.FindNext();
+      }
+      if (indexList.retrieve().List_ID.equals(term.toLowerCase().trim()))
+         list.insert(indexList.retrieve().ID);
+      return list;
+
+   }
+
+   // display come baaaaaaccccckkkkkkkk!!!!!!!!!!!!
 
 }// end of class
  // this class for id and doc

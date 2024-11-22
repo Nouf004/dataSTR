@@ -7,6 +7,17 @@ public class QAndOr {
 
     }
 
+    static LinkedList<Integer> booleanQ(String q) {
+        if (!q.contains("AND") && !q.contains("OR"))
+            return AndQ(q);
+        else if (q.contains("AND") && !q.contains("OR"))
+            return AndQ(q);
+        else if (!q.contains("AND") && q.contains("OR"))
+            return OrQ(q);
+        else
+            return mixedQuery(q);
+    }
+
     public static LinkedList<Integer> AndQ(String Q) {
 
         LinkedList<Integer> X = new LinkedList<Integer>();
@@ -128,4 +139,19 @@ public class QAndOr {
         return false;
 
     }
+
+    static LinkedList<Integer> mixedQuery(String q) {
+        LinkedList<Integer> X = new LinkedList<Integer>();
+        LinkedList<Integer> Y = new LinkedList<Integer>();
+        if (q.length() == 0)
+            return X;
+        String[] ors = q.split("OR");
+        X = AndQ(ors[0]);
+        for (int i = 1; i < ors.length; i++) {
+            Y = AndQ(ors[i]);
+            X = OrQ(X, Y);
+        }
+        return X;
+    }
+
 }
