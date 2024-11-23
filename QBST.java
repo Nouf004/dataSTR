@@ -5,6 +5,32 @@ public class QBST {
     public QBST(InvertedIndexBST inver) {
         invert = inver;
     }
+    
+      static LinkedList<Integer> Boolean_Query(String q) {
+        if (!q.contains("AND") && !q.contains("OR"))
+            return AndQ(q);
+        else if (q.contains("AND") && !q.contains("OR"))
+            return AndQ(q);
+        else if (!q.contains("AND") && q.contains("OR"))
+            return OrQ(q);
+        else
+            return mixedQuery(q);
+
+    }
+      static LinkedList<Integer> mixedQuery(String q) {
+        LinkedList<Integer> X = new LinkedList<Integer>();
+        LinkedList<Integer> Y = new LinkedList<Integer>();
+
+        if (q.length() == 0)
+            return X;
+        String[] ors = q.split("OR");
+        X = AndQ(ors[0]);
+        for (int i = 1; i < ors.length; i++) {
+            Y = AndQ(ors[i]);
+            X = OrQ(X, Y);
+        }
+        return X;
+    }
 
     public static LinkedList<Integer> AndQ(String Q) {
 
@@ -128,31 +154,6 @@ public class QBST {
 
     }
 
-    static LinkedList<Integer> mixedQuery(String q) {
-        LinkedList<Integer> X = new LinkedList<Integer>();
-        LinkedList<Integer> Y = new LinkedList<Integer>();
-
-        if (q.length() == 0)
-            return X;
-        String[] ors = q.split("OR");
-        X = AndQ(ors[0]);
-        for (int i = 1; i < ors.length; i++) {
-            Y = AndQ(ors[i]);
-            X = OrQ(X, Y);
-        }
-        return X;
-    }
-
-    static LinkedList<Integer> Boolean_Query(String q) {
-        if (!q.contains("AND") && !q.contains("OR"))
-            return AndQ(q);
-        else if (q.contains("AND") && !q.contains("OR"))
-            return AndQ(q);
-        else if (!q.contains("AND") && q.contains("OR"))
-            return OrQ(q);
-        else
-            return mixedQuery(q);
-
-    }
+ 
 
 }
