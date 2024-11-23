@@ -33,6 +33,15 @@ public class invertedIndex {
       return false;
    }// end method
 
+   void display() {
+      inverList.FindFirst();
+      while (!inverList.last()) {
+         System.out.println(inverList.retrieve());
+         inverList.FindNext();
+      }
+      System.out.println(inverList.retrieve());
+   
+   }
    public void diplayInvertedIndex(){
       if(inverList==null){
          System.out.println("null inverted index");
