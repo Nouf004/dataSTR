@@ -49,7 +49,7 @@ public class index {
       System.out.println("ID:" + doc.ID);
    }// end method displa
 
-   LinkedList<Integer> getallDocumentInTerms(String term) {
+  /* LinkedList<Integer> getallDocumentInTerms(String term) {
       LinkedList<Integer> list = new LinkedList<Integer>();
       if (indexList.empty()) {
          System.out.println("there is no document");
@@ -66,7 +66,7 @@ public class index {
       return list;
 
    }
-
+*/
    LinkedList<Integer> displayDoc(String term) {
       LinkedList<Integer> list = new LinkedList<Integer>();
       if (indexList.empty()) {
@@ -85,7 +85,6 @@ public class index {
 
    }
 
-   // display come baaaaaaccccckkkkkkkk!!!!!!!!!!!!
-
+  
 }// end of class
  // this class for id and doc

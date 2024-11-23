@@ -33,14 +33,22 @@ public class invertedIndex {
       return false;
    }// end method
 
-   void display() {
+   public void diplayInvertedIndex(){
+      if(inverList==null){
+         System.out.println("null inverted index");
+         return;
+      }
+      else if(inverList.empty()){
+         System.out.println("empty inverted index list");
+         return;
+      }
       inverList.FindFirst();
-      while (!inverList.last()) {
-         System.out.println(inverList.retrieve());
+      while(!inverList.last()){
+         inverList.retrieve().display();
          inverList.FindNext();
       }
-      System.out.println(inverList.retrieve());
-
+      inverList.retrieve().display();
+   
    }
 }
 // this class is for searching and adding the uniqe words in list
