@@ -2,10 +2,10 @@
 import java.util.*;
 import java.io.*;
 
-public class LinkedList<T> {
+public class LinkedList<T>implements List<T> {
 
-   Node<T> head;
-   Node<T> current;
+   private Node<T> head;
+   private Node<T> current;
    int n = 0;
 
    LinkedList() {
