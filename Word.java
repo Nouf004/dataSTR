@@ -21,8 +21,8 @@ public class Word {
     void display() {
 
         System.out.println("\n-----------------------------");
-        System.out.println("word:" + text);
-        System.out.println("[");
+        System.out.print("word:" + text);
+        System.out.print("[");
         document_IDs.display();
         System.out.println("]");
 
@@ -34,11 +34,11 @@ public class Word {
             return false;
         document_IDs.FindFirst();
         while (!document_IDs.last()) {
-            if (document_IDs.retrieve() == id)
-                return true;
+            if (document_IDs.retrieve().equals(id)){
+                return true;}
             document_IDs.FindNext();
         }
-        if (document_IDs.retrieve() == id)
+        if (document_IDs.retrieve().equals(id))
             return true;
 
         return false;
