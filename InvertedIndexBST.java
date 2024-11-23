@@ -1,9 +1,9 @@
 public class InvertedIndexBST {
 
-   BST<Word> inverted_indexbst;
+   BST<Word> inverted_index;
 
    public InvertedIndexBST() {
-      inverted_indexbst = new BST<Word>();
+      inverted_index = new BST<Word>();
 
    }
 
@@ -14,13 +14,13 @@ public class InvertedIndexBST {
       inverted.inverList.FindFirst();
       while (!inverted.inverList.last()) {
 
-         inverted_indexbst.insert(inverted.inverList.retrieve().text, inverted.inverList.retrieve());
+         inverted_index.insert(inverted.inverList.retrieve().text, inverted.inverList.retrieve());
 
          inverted.inverList.FindNext();
 
       } // while
 
-      inverted_indexbst.insert(inverted.inverList.retrieve().text, inverted.inverList.retrieve());
+      inverted_index.insert(inverted.inverList.retrieve().text, inverted.inverList.retrieve());
 
    }// end add from list
 
@@ -28,27 +28,27 @@ public class InvertedIndexBST {
       if (!search(str)) {
          Word w = new Word(str);
          w.document_IDs.insert(ID);
-         inverted_indexbst.insert(str, w);
+         inverted_index.insert(str, w);
       } // end if
       else {
-         Word existWord = inverted_indexbst.retrieve();
+         Word existWord = inverted_index.retrieve();
          existWord.addID(ID);
       }
    }// end method
 
    boolean search(String word) {
-      return inverted_indexbst.findkey(word);
+      return inverted_index.findkey(word);
    }// end method
 
    void displayInvertedIndex() {
 
-      if (inverted_indexbst == null) {
+      if (inverted_index == null) {
          System.out.println("null");
          return;
-      } else if (inverted_indexbst.empty()) {
+      } else if (inverted_index.empty()) {
          System.out.println("it is empty");
          return;
       }
-      inverted_indexbst.inOrder();
+      inverted_index.inOrder();
    }
 } // end class
