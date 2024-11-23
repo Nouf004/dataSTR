@@ -133,18 +133,18 @@ void writeAssignedApplicants(){
    outFile=fopen("Applicants.txt","w");
 
    fprintf(outFile,"The applicants are:\n");
-   fprintf(outFile,"%0s %20s %15s %20s %20s %20s %20s %20s %5s \n","id","Name","Education","Experience","Major","GPA","State");
+   fprintf(outFile," %20s %15s %20s %20s %20s %20s %20s\n","id","Name","Education","Experience","Major","GPA","State");
    for(int i=0;i<line;i++){
       if( strcmp( list[i].state , "Assigned") == 0 )  
-         fprintf(outFile,"%0d %20s %15s %20s %20d %20f %20s %20f %5s \n", &list[i].id , list[i].applicant,list[i].education , &list[i].Experience , list[i].major ,&list[i].GPA ,list[i].state);
-   fprintf(outFile,"%0d %20s %15s %20s %20d %20f %20s %20f %5s \n", &list[i].id , list[i].applicant,list[i].education , &list[i].Experience , list[i].major ,&list[i].GPA ,"OWL");
+         fprintf(outFile,"%20d\t%20s\t%15s\t%20d\t%20s\t%.2f\t%20s\n", list[i].id , list[i].applicant,list[i].education , list[i].Experience , list[i].major ,list[i].GPA ,list[i].state);
+   fprintf(outFile,"%20d\t%20s\t%15s\t%20d\t%20s\t%.2f\t%20s\n", list[i].id , list[i].applicant,list[i].education , list[i].Experience , list[i].major ,list[i].GPA ,"OWL");
    }
    fprintf(outFile,"----------\n");
 
-   fprintf(outFile,"\n The Candicate list is: \n %0s %5s %3s %5s %5s %4s","id","Applicant","Education","Major","Points","State");
+   fprintf(outFile,"\n The Candicate list is: \n %20s %5s %3s %5s %5s %4s","id","Applicant","Education","Major","Points","State");
    for(int i=0;i<line;i++){
       if (strcmp(list[i].state, "Assigned") || strcmp(list[i].state, "candidate")) {  
-         fprintf(outFile," %0d %5s %3s %5s %5s %4s \n ",&list[i].id,list[i].applicant,list[i].education ,list[i].major,list[i].points,list[i].state );
+         fprintf(outFile," %20d %5s %3s %5s %5f %4s \n ",list[i].id,list[i].applicant,list[i].education ,list[i].major,list[i].points,list[i].state );
       }
    }
       fprintf(outFile,"----------\n");
@@ -153,7 +153,7 @@ void writeAssignedApplicants(){
       fprintf(outFile,"\n Assigned Application is: \n");
       for(int i=0;i<line;i++){
          if (strcmp(list[i].state, "Assigned"))
-            fprintf(outFile," %0d %5s %3s %5s %5s %4s \n", &list[i].id,list[i].applicant,list[i].education ,list[i].major,list[i].points,list[i].state );
+            fprintf(outFile," %0d %5s %3s %5s %5f %4s \n", list[i].id,list[i].applicant,list[i].education ,list[i].major,list[i].points,list[i].state );
       }
    
       fprintf(outFile,"----------\n");
