@@ -42,14 +42,18 @@ public class index {
          Document doc = indexList.retrieve();
          System.out.println("\n--------------------------------");
          System.out.println("ID:" + doc.ID);
+         doc.List_ID.display();//*
          indexList.FindNext();
       } // end while
       Document doc = indexList.retrieve();
       System.out.println("\n--------------------------------");
       System.out.println("ID:" + doc.ID);
-   }// end method displa
+   doc.List_ID.display();//*
 
-  /* LinkedList<Integer> getallDocumentInTerms(String term) {
+   }// end method displa
+   
+/////////////////////////////////////////////////////
+   LinkedList<Integer> getallDocumentInTerms(String term) {
       LinkedList<Integer> list = new LinkedList<Integer>();
       if (indexList.empty()) {
          System.out.println("there is no document");
@@ -66,7 +70,7 @@ public class index {
       return list;
 
    }
-*/
+
    LinkedList<Integer> displayDoc(String term) {
       LinkedList<Integer> list = new LinkedList<Integer>();
       if (indexList.empty()) {
