@@ -6,7 +6,7 @@ public class LinkedList<T> {
 
    Node<T> head;
    Node<T> current;
-
+int n=0;
    LinkedList() {
       head = current = null;
 
@@ -43,6 +43,7 @@ public class LinkedList<T> {
    }
 
    public void insert(T val) {
+      n++;
       Node<T> tmp;
 
       if (empty()) {
@@ -71,7 +72,7 @@ public class LinkedList<T> {
       else
          current = current.next;
    }
-
+//public boolean exist
    public void display() { // complete it
    }
 }
