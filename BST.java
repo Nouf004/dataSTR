@@ -66,73 +66,7 @@ public class BST<T> {
 
     } // end insert
 
-    /*
-     * boolean remove_key(int tkey) {
-     * 
-     * BooleanWrapper removed = new BooleanWrapper(false);
-     * 
-     * BSTNode<T> p;
-     * p = remove_aux(tkey, root, removed);
-     * current = root = p;
-     * return removed.get();
-     * 
-     * }// end remove key
-     * 
-     * private BSTNode<T> remove_aux(int key, BSTNode<T> p, BooleanWrapper flag) {
-     * 
-     * BSTNode<T> q, child = null;
-     * 
-     * if (p == null)
-     * return null;
-     * 
-     * if (key < p.key)
-     * p.left = remove_aux(key, p.left, flag);
-     * else if (key > p.key)
-     * p.right = remove_aux(key, p.right, flag);
-     * 
-     * else {
-     * flag.set(true);
-     * if (p.left != null && p.right != null) {
-     * q = find_min(p.right);
-     * p.key = q.key;
-     * p.data = q.data;
-     * p.right = remove_aux(q.key, p.right, flag);
-     * }
-     * 
-     * else {
-     * if (p.right == null)
-     * child = p.left;
-     * else if (p.left == null)
-     * child = p.right;
-     * return child;
-     * }
-     * }
-     * return p;
-     * 
-     * } // remove aux
-     */
-
-    /*
-     * private BSTNode<T> find_min(BSTNode<T> p) {
-     * 
-     * if (p == null)
-     * return null;
-     * 
-     * while (p.left != null) {
-     * p = p.left;
-     * }
-     * 
-     * return p;
-     * } // end find min
-     * 
-     * boolean update(int key, T data) {
-     * 
-     * remove_key(current.key);
-     * 
-     * return insert(key, data);
-     * }// end update
-     */
-
+    
     void inOrder() {
 
         if (root == null)
@@ -167,10 +101,9 @@ public class BST<T> {
         if (p == null)
             return;
         System.out.println("key=" + p.key);
-        System.out.println(p.data.toString());
+        System.out.println(p.data.toString());//come
         preOrder(p.left);
         preOrder(p.right);
-
     }
 
 } // end class
