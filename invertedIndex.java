@@ -24,16 +24,17 @@ public class invertedIndex {
          return false;
       inverList.FindFirst();
       while (!inverList.last()) {
-         if (inverList.retrieve().text.equals(word))
-            return true;
+         if (inverList.retrieve().text.equals(word)){
+            return true;}
          inverList.FindNext();
       } // while
-      if (inverList.retrieve().text.equals(word))
-         return true;
+      if (inverList.retrieve().text.equals(word)){
+         return true;}
       return false;
    }// end method
+   
 
-   void display() {
+  /* void display() {
       inverList.FindFirst();
       while (!inverList.last()) {
          System.out.println(inverList.retrieve());
@@ -41,7 +42,9 @@ public class invertedIndex {
       }
       System.out.println(inverList.retrieve());
    
-   }
+   }*/
+    //come here
+    
    public void diplayInvertedIndex(){
       if(inverList==null){
          System.out.println("null inverted index");
