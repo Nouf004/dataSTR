@@ -1,4 +1,3 @@
-
 public class BSTNode<T> {
 
     public int key;

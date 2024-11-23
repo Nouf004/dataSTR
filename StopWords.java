@@ -7,6 +7,7 @@ class StopWords {
    InvertedIndexBST invertedBST;
    LinkedList<String> stop;
    int numOftokens = 0;
+   LinkedList<String> unique = new LinkedList<>();
 
    StopWords() {
       stop = new LinkedList<String>();
@@ -80,11 +81,14 @@ class StopWords {
       content = content.toLowerCase().replaceAll("[^a-zA-Z0-9]", "");
       String[] tokens = content.split("\\s+");
       numOftokens += tokens.length;
-      for (int i = 0; i < tokens.length; i++) {
-         if (!existStopWords(content)) {
-            wordsInDoc.insert(content);
-            invers.addWord(content, id);
+      for (String w : tokens) {
+         if (!existStopWords(w)) {
+            wordsInDoc.insert(w);
+            invers.addWord(w, id);
+            invertedBST.add(w, id);
          }
+         if (!unique.exist(w))
+            unique.insert(w);
       }
    }
 

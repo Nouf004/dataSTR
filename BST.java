@@ -1,22 +1,7 @@
-public class BSTNode<T> {
-
-    public String key;
-    public T data;
-    public BSTNode<T> left, right;
-
-    public BSTNode(String k, T val) {
-
-        key = k;
-        data = val;
-        left = right = null;
-
-    }
-
-}
 
 public class BST<T> {
 
-    private BSTNode<T> root, current;
+    private BSTNode1<T> root, current;
 
     BST() {
 
@@ -39,7 +24,7 @@ public class BST<T> {
     }
 
     boolean findkey(String tkey) {
-        BSTNode<T> p = root;
+        BSTNode1<T> p = root;
 
         while (p != null) {
 
@@ -58,18 +43,18 @@ public class BST<T> {
 
     boolean insert(String k, T val) {
         if (root == null) {
-            current = root = new BSTNode<T>(k, val);
+            current = root = new BSTNode1<T>(k, val);
             return true;
         }
 
-        BSTNode<T> p = current;
+        BSTNode1<T> p = current;
 
         if (findkey(k)) {
 
             current = p;
             return false;
         }
-        BSTNode<T> tmp = new BSTNode<T>(k, val);
+        BSTNode1<T> tmp = new BSTNode1<T>(k, val);
 
         if (k.compareToIgnoreCase(current.key) < 0)
             current.left = tmp;
@@ -157,7 +142,7 @@ public class BST<T> {
 
     }// end inorder
 
-    private void inOrder(BSTNode p) {
+    private void inOrder(BSTNode1 p) {
 
         if (p == null)
             return;
@@ -177,7 +162,7 @@ public class BST<T> {
             preOrder(root);
     }
 
-    private void preOrder(BSTNode p) {
+    private void preOrder(BSTNode1 p) {
 
         if (p == null)
             return;

@@ -6,7 +6,8 @@ public class LinkedList<T> {
 
    Node<T> head;
    Node<T> current;
-int n=0;
+   int n = 0;
+
    LinkedList() {
       head = current = null;
 
@@ -72,8 +73,30 @@ int n=0;
       else
          current = current.next;
    }
-//public boolean exist
-   public void display() { // complete it
+
+   public boolean exist(T x) {
+      Node<T> tmp = head;
+      while (tmp != null) {
+         if (tmp.data.equals(x))
+            return true;
+         tmp = tmp.next;
+      }
+      return false;
    }
+
+   public void display() {
+      if (this == null)
+         System.out.println("List is null");
+      if (head == null)
+         System.out.println("List is empty");
+      Node<T> p = head;
+      while (p != null) {
+         System.out.print(p.data + " ");
+         p = p.next;
+      }
+
+   }
+
 }
+
 // list
