@@ -11,5 +11,4 @@ public class BSTNode<T> {
         left = right = null;
 
     }
-
 }

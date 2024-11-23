@@ -10,6 +10,7 @@ public class index {
 
    void addDoc(Document text) {
       indexList.insert(text);
+      
    }
 
    Document getID(int id) {

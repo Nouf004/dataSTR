@@ -101,9 +101,10 @@ public class BST<T> {
         if (p == null)
             return;
         System.out.println("key=" + p.key);
-        System.out.println(p.data.toString());//come
+        System.out.println(p.data.toString());//
         preOrder(p.left);
         preOrder(p.right);
     }
+    
 
 } // end class

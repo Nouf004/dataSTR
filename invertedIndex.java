@@ -34,7 +34,7 @@ public class invertedIndex {
    }// end method
    
 
-  /* void display() {
+   void display() {
       inverList.FindFirst();
       while (!inverList.last()) {
          System.out.println(inverList.retrieve());
@@ -42,8 +42,7 @@ public class invertedIndex {
       }
       System.out.println(inverList.retrieve());
    
-   }*/
-    //come here
+   }
     
    public void diplayInvertedIndex(){
       if(inverList==null){

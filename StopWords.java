@@ -20,16 +20,13 @@ class StopWords {
    void Load_Stop(String fileName) {
       try {
          File f = new File(fileName);
-         if (!f.exists()) {
-            System.out.println("File not found: " + fileName);
-            return;
-         }
+        
          Scanner s = new Scanner(f);
          while (s.hasNextLine()) {
             String line = s.nextLine();
-            stop.insert(line.trim());
+            stop.insert(line);
          }
-         s.close();
+         s.close();//check here
       } catch (IOException e) {
          e.printStackTrace();
       }
@@ -37,24 +34,27 @@ class StopWords {
 
    public void loadAllDocs(String fileName) {
       try {
-         File f = new File(fileName);
-         if (!f.exists()) { // Check if the file exists
+         File file = new File(fileName);
+         if (!file.exists()) { // Check if the file exists
             System.out.println("File not found: " + fileName);
             return;
          }
+      
          System.out.println("Loading documents from: " + fileName); // Debug
-         Scanner s = new Scanner(f);
+         Scanner scanner = new Scanner(file);
       
          boolean isHeader = true; // Flag to skip the header
-         while (s.hasNextLine()) {
-            String line = s.nextLine().trim();
+         while (scanner.hasNextLine()) {
+            String line = scanner.nextLine().trim();
          
             // Skip header or empty lines
             if (isHeader) {
                isHeader = false;
                continue;
             }
-            if (line.isEmpty() || !line.contains(",")) {
+         
+            // Check if the line is invalid (e.g., missing ID or content)
+            if (line.isEmpty() || !line.contains(",") || line.split(",").length < 2) {
                System.out.println("Skipping invalid or empty line: " + line);
                continue;
             }
@@ -62,12 +62,8 @@ class StopWords {
             try {
                 // Extract document ID and content
                String[] parts = line.split(",", 2); // Split into at most two parts
-               if (parts.length < 2) {
-                  System.out.println("Skipping invalid line: " + line);
-                  continue;
-               }
-               int id = Integer.parseInt(parts[0].trim());
-               String content = parts[1].trim();
+               int id = Integer.parseInt(parts[0].trim()); // Parse ID
+               String content = parts[1].trim(); // Get content
             
                 // Debug info
                System.out.println("Document ID: " + id);
@@ -83,20 +79,46 @@ class StopWords {
                e.printStackTrace();
             }
          }
-         s.close(); // Close the scanner
+         scanner.close(); // Close the scanner
       } catch (IOException e) {
          e.printStackTrace();
       }
-   }
+   }   
 
+      
+     
 
-   LinkedList<String> make_words_inverted(String content, int id) {
-   
+        LinkedList<String> make_words_inverted(String content, int id) {
       LinkedList<String> words = new LinkedList<String>();
-      createIndex_InvertedIndex(content, words, id);
+   
+    // Preprocess content
+      content = content.replaceAll("'", " "); // Replace single quotes
+      content = content.replaceAll("-", " "); // Replace hyphens
+      content = content.toLowerCase().replaceAll("[^a-z0-9\\s]", ""); // Keep alphanumeric and spaces
+   
+    // Split content into tokens
+      String[] tokens = content.split("\\s+"); // Split by whitespace
+      numOftokens += tokens.length;
+   
+      for (String token : tokens) {
+        // Check if the token is not a stop word
+         if (!existStopWords(token)) {
+            words.insert(token); // Add word to document list
+            invers.addWord(token, id); // Add word to inverted index
+            invertedBST.add(token, id); // Add word to BST if used
+         } else {
+            System.out.println("Skipping stop word: " + token); // Debug skipped stop words
+         }
+      
+        // Add to unique words list if it's new
+         if (!unique.exist(token)) {
+            unique.insert(token);
+         }
+      }
+   
       return words;
    }
-
+      
    void createIndex_InvertedIndex(String content, LinkedList<String> wordsInDoc, int id) {
       content = content.replaceAll("\'", " ");
       content = content.replaceAll("-", " ");
@@ -115,20 +137,21 @@ class StopWords {
    }
 
    boolean existStopWords(String word) {
+      if (stop == null || stop.empty()) 
+         return false; // Handle null or empty stop word list
    
-      if (stop == null || stop.empty())
-         return false;
-      stop.FindFirst();
+      stop.FindFirst(); // Start at the first element in the stop list
       while (!stop.last()) {
-         if (stop.retrieve().equals(word))
-            return true;
+         if (stop.retrieve().equalsIgnoreCase(word)) {
+            return true; // The word is a stop word
+         }
          stop.FindNext();
-      } // while
-      if (stop.retrieve().equals(word))
-         return true;
-      return false;
-   }// end method
-
+      }
+   
+    // Check the last element
+      return stop.retrieve().equalsIgnoreCase(word);
+   } 
+     
    void loadAllFiles(String Sfile, String docFiles) {
       Load_Stop(Sfile);
       loadAllDocs(docFiles);
@@ -164,7 +187,7 @@ class StopWords {
       s.loadAllFiles("stop.txt", "dataset.csv");
       s.index1.displayDoc();
       System.out.println("\n--------------------------");
-      s.invers.diplayInvertedIndex();
+      s.invers.diplayInvertedIndex();//come
       Scanner input = new Scanner(System.in);
    
       int ch = 0;
@@ -216,7 +239,7 @@ class StopWords {
                Q = Q.replaceAll(" or ", " OR ");
             
                System.out.println(
-                     "which method would you want to make a query? /n 1-using index with lists./n 2- inverted index with lists./n 3- inverted index with BST.");
+                     "which method would you want to make a query? \n 1-using index with lists.\n 2- inverted index with lists.\n 3- inverted index with BST.");
             
                int x = input.nextInt();
                do {
@@ -247,7 +270,7 @@ class StopWords {
                      System.out.println("wrong query");
                
                   System.out.println(
-                        "which method would you want to make a query? /n 1-using index with lists./n 2- inverted index with lists./n 3- inverted index with BST.");
+                        "which method would you want to make a query? \n 1-using index with lists.\n 2- inverted index with lists.\n 3- inverted index with BST.");
                   x = input.nextInt();
                } while (x != 4);
                break;
@@ -297,7 +320,7 @@ class StopWords {
          
             case 10:
                System.out.println("Menu exited");
-            break;
+               break;
             default:
                System.out.println("Error!");
          }// switch
