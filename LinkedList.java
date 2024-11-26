@@ -10,7 +10,7 @@ public class LinkedList<T>{
 
    LinkedList() {
       head = current = null;
-
+   
    }
 
    public boolean empty() {
@@ -18,7 +18,7 @@ public class LinkedList<T>{
    }
 
    public boolean full() {
-
+   
       return false;
    }
 
@@ -27,11 +27,15 @@ public class LinkedList<T>{
    }
 
    public void FindNext() {
+      if (current == null) {
+         throw new IllegalStateException("Current node is null. Cannot move to the next node.");
+      }
       current = current.next;
    }
 
-   public T retrieve() {
 
+   public T retrieve() {
+   
       return current.data;
    }
 
@@ -46,7 +50,7 @@ public class LinkedList<T>{
    public void insert(T val) {
       n++;
       Node<T> tmp;
-
+   
       if (empty()) {
          current = head = new Node<T>(val);
       } else {
@@ -58,12 +62,12 @@ public class LinkedList<T>{
    }
 
    public void remove() {
-
+   
       if (current == head) {
          head = head.next;
       } else {
          Node<T> tmp = head;
-
+      
          while (tmp.next != current)
             tmp = tmp.next;
          tmp.next = current.next;
@@ -94,9 +98,19 @@ public class LinkedList<T>{
          System.out.print(p.data + " ");
          p = p.next;
       }
-
+   
    }
-
-}
-
-// list
+   public String toString() {
+      StringBuilder sb = new StringBuilder("[");
+      if (!empty()) {
+         FindFirst();
+         while (!last()) {
+            sb.append(retrieve()).append(", ");
+            FindNext();
+         }
+         sb.append(retrieve()); // Add the last element without a trailing comma
+      }
+      sb.append("]");
+      return sb.toString();
+   }
+}// list

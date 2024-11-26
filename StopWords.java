@@ -88,7 +88,7 @@ class StopWords {
       
      
 
-        LinkedList<String> make_words_inverted(String content, int id) {
+   LinkedList<String> make_words_inverted(String content, int id) {
       LinkedList<String> words = new LinkedList<String>();
    
     // Preprocess content
@@ -244,12 +244,40 @@ class StopWords {
                int x = input.nextInt();
                do {
                   if (x == 1) {
-                     QueryProcessingFromIndex q = new QueryProcessingFromIndex(StopWords.index1);
-                     System.out.println("------------" + Q + "-------------");
-                     LinkedList<Integer> res = QueryProcessingFromIndex.mixedQuery(Q);
-                     s.displayDocWithID(res);
+                     if (StopWords.index1 == null) {
+                        System.out.println("Error: StopWords.index1 is null.");
+                        return;
+                     }
                   
-                  } else if (x == 2) {
+                     if (StopWords.index1 == null) {
+                        System.out.println("Error: StopWords.index1 is null.");
+                        return;
+                     }
+                  
+                     QueryProcessingFromIndex q = new QueryProcessingFromIndex(StopWords.index1);
+                  
+                  // Check if the query is valid
+                     System.out.println("Processing query: " + Q);
+                     LinkedList<Integer> res = QueryProcessingFromIndex.mixedQuery(Q);
+                  
+                  // Check if mixedQuery returned results
+                     if (res == null || res.empty()) {
+                        System.out.println("No results found for query: " + Q);
+                        return;
+                     }
+                  
+                  // Check if the 's' object is initialized
+                     if (s == null) {
+                        System.out.println("Error: Object 's' is null.");
+                        return;
+                     }
+                  
+                  // Display the documents
+                     System.out.println("------------" + Q + "-------------");
+                     s.displayDocWithID(res);
+                  }                        
+                  
+                  else if (x == 2) {
                      QAndOr q = new QAndOr(s.invers);
                      System.out.println("------------" + Q + "-------------");
                      LinkedList<Integer> res1 = QAndOr.mixedQuery(Q);

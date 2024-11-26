@@ -30,7 +30,7 @@ public class Ranking {
    }// end method
 
    public static Document getDocGivenId(int id) {
-      return Index.getID(id);//?
+      return Index.getID(id);
    }
 
    // trem frequency in doc
@@ -154,7 +154,7 @@ public class Ranking {
          return;
       } 
       else 
-   allDocRank.insert(dr);
+         allDocRank.insert(dr);
    }// end method
    
 }// end class
